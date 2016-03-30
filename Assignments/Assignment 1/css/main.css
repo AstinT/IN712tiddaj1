@@ -1,3 +1,19 @@
+body
+{
+	background-color: #6195A0;
+	font-size: 1.5em;
+}
+
+h1
+{
+	font-size: 4em;
+}
+
+h2
+{
+	font-size: 2em;
+}
+
 .generic-div
 {
 	background: #B6B2B1;
@@ -8,29 +24,15 @@
     border-radius: 25px;
 }
 
-body
+/* Changes div background-color when hover */
+.generic-div:hover
 {
-	background-color: #6195A0;
+	background: #FFFFFF;
 }
 
-h1
+.heading
 {
-	font-size: 4em;
-}
-
-h2
-{
-	font-size: 3em;
-}
-
-h3
-{
-	font-size: 2em;
-}
-
-h4
-{
-	font-size: 2em;
+	text-align: center;
 }
 
 img
@@ -38,4 +40,11 @@ img
 	max-height: 270px;
 	display:block;
     margin:auto;
+	transition: all 5s ease;
+}
+
+/* Rotates image when hover */
+img:hover
+{
+  transform: rotate(360deg);
 }
