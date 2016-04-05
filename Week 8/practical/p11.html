@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JavaScript Form Validation</title>
+		<script src="p11.js"> </script>
+		<link rel="stylesheet" href="p11.css">
+	</head>
+
+	<body>
+		<h1>Enter Your Details:</h1>
+		
+		<form name="contactForm" method="post" action="">
+	
+			<div>
+				<label for="contactName">Name:</label>
+				<input type="text" name="contactName">
+			</div>
+
+			<div>
+				<label for="gender">Gender:</label>
+				<input type="radio" name="gender" value="Male"> Male
+				<input type="radio" name="gender" value="Female"> Female</p>
+			</div>
+			
+			<div>
+				<label for="age">Age:</label>
+				<select name="age">
+					<option value="">select your age range:</option>
+					<option value="0-18 years">0-18 years</option>
+					<option value="18-30 years">18-30 years</option>
+					<option value="30-45 years">30-45 years</option>
+					<option value="45-60 years">45-60 years</option>
+					<option value="60+ years">60+ years</option>
+				</select>
+			</div>
+			
+			<div>
+				<label for="terms">Do you agree with the Terms and Conditions of the site?:</label>
+				<input type="checkbox" name="terms" value="Yes"> Yes
+			</div>
+			
+			<div>
+				<input type="submit" id="submitButton" name="send" value="Submit">
+			</div>
+			
+			<div>
+				<p id="output"></p>
+			</div>
+		</form>
+
+	</body>
+
+</html>
