@@ -1,8 +1,10 @@
-//your code for Assignment 2 goes here
+//Global Variables
 var pinoInput;
 var charInput;
 var sauvInput;
 var riesInput;
+var dropDown;
+var emailInput;
 
 function init()
 {
@@ -10,6 +12,8 @@ function init()
 	charInput = document.getElementById("txt-q-cold");
 	sauvInput = document.getElementById("txt-q-garlic");
 	riesInput = document.getElementById("txt-q-lemon");
+	dropDown = document.getElementById("s-state");
+	emailInput = document.getElementById("email");
 	
 	var btnEstimate = document.getElementById("btn-estimate");
 	btnEstimate.onclick = estimateTotal;
@@ -17,28 +21,30 @@ function init()
 
 function estimateTotal()
 {
-	var pinoNum = 0;
-	var charNum = 0;
-	var sauvNum = 0;
-	var riesNum = 0;
-	
-	if(checkInput())
+	//Checks if the user has selected a shipping state
+	if(checkStateSelected())
 	{
-		pinoNum = pinoInput.value;
-		charNum = charInput.value;
-		sauvNum = sauvInput.value;
-		riesNum = riesInput.value;
+		var selectedState = getSelectedState();
+		
+		//Check if the user has entered a valid email
+		if(checkEmail())
+		{
+			alert("Email Passed");
+		}
+		else
+		{
+			alert("Please enter a valid email.")
+		}
 	}
 	else
 	{
-		alert("Please only enter numbers!");
+		alert("Please choose your shipping state");
 	}
 }
 
-function checkInput()
-{	
-	if(!isNaN(pinoInput.value) && !isNaN(charInput.value) &&
-		!isNaN(sauvInput.value) && !isNaN(riesInput.value))
+function checkStateSelected()
+{
+	if(dropDown.value != "")
 	{
 		return true;
 	}
@@ -47,5 +53,32 @@ function checkInput()
 		return false;
 	}
 }
+
+function getSelectedState()
+{
+	return dropDown.value;
+}
+
+function checkEmail()
+{
+	var email = emailInput.value;
+	var regex = /\S+@\S+\.\S+/;
+	return regex.test(email);
+}
+
+/*
+function checkNumsEntered()
+{	
+	if(!isNaN(pinoInput.value) && !isNaN(charInput.value) &&
+		!isNaN(sauvInput.value) && !isNaN(riesInput.value))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+}
+*/
 
 window.onload = init;
