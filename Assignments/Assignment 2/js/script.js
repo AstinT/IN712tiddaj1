@@ -21,6 +21,8 @@ function init()
 
 function estimateTotal()
 {
+	var totalCost = 0;
+	
 	//Checks if the user has selected a shipping state
 	if(checkStateSelected())
 	{
@@ -29,7 +31,12 @@ function estimateTotal()
 		//Check if the user has entered a valid email
 		if(checkEmail())
 		{
-			alert("Email Passed");
+			//get Selected radiobutton - adding to cost
+			//get tax async 
+			//get bottles entered
+			//calculate total cost
+			//Output total cost
+			//display animation
 		}
 		else
 		{
