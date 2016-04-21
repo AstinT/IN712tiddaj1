@@ -21,31 +21,25 @@ function init()
 
 function estimateTotal()
 {
-	var totalCost = 0;
-	
 	//Checks if the user has selected a shipping state
 	if(checkStateSelected())
-	{
-		var selectedState = getSelectedState();
-		
+	{		
 		//Check if the user has entered a valid email
 		if(checkEmail())
 		{
-			//get Selected radiobutton - adding to cost
-			//get tax async 
-			//get bottles entered
-			//calculate total cost
-			//Output total cost
-			//display animation
+			var url = "https://dl.dropboxusercontent.com/u/10089854/Web3/Assignment2/stateTaxInfo.json";
+			ajaxRequestGetTax(url);
 		}
 		else
 		{
-			alert("Please enter a valid email.")
+			alert("Please enter a valid email.");
+			emailInput.focus();
 		}
 	}
 	else
 	{
-		alert("Please choose your shipping state");
+		alert("Please choose your shipping state.");
+		dropDown.focus();
 	}
 }
 
@@ -66,6 +60,25 @@ function getSelectedState()
 	return dropDown.value;
 }
 
+function ajaxRequestGetTax(url)
+{
+	var httpRequestInstance = new XMLHttpRequest();
+	httpRequestInstance.onreadystatechange = function() 
+	{
+		if (httpRequestInstance.readyState == 4 && httpRequestInstance.status == 200) 
+		{
+			var selectedState = getSelectedState();
+			var jsonTax = JSON.parse(httpRequestInstance.responseText);
+			var tax = jsonTax[selectedState];
+			calculateCost(tax);
+			outputCost();
+		}
+	};
+  
+	httpRequestInstance.open("GET", url, true);
+	httpRequestInstance.send();
+}
+
 function checkEmail()
 {
 	var email = emailInput.value;
@@ -74,6 +87,12 @@ function checkEmail()
 }
 
 /*
+function delay(ms) 
+{
+   ms += new Date().getTime();
+   while (new Date() < ms){}
+}
+
 function checkNumsEntered()
 {	
 	if(!isNaN(pinoInput.value) && !isNaN(charInput.value) &&
