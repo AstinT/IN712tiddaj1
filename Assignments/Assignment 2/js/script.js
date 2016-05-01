@@ -27,8 +27,17 @@ function estimateTotal()
 		//Check if the user has entered a valid email
 		if(checkEmail())
 		{
-			var url = "https://dl.dropboxusercontent.com/u/10089854/Web3/Assignment2/stateTaxInfo.json";
-			ajaxRequestGetTax(url);
+			//Checks if user has entered 
+			if(checkNumsEntered())
+			{
+				var url = "https://dl.dropboxusercontent.com/u/10089854/Web3/Assignment2/stateTaxInfo.json";
+				//Makes ajax request
+				ajaxRequestGetTax(url);
+			}
+			else
+			{
+				alert("Please change the quantity.");			
+			}			
 		}
 		else
 		{
@@ -55,9 +64,11 @@ function checkStateSelected()
 	}
 }
 
-function getSelectedState()
+function checkEmail()
 {
-	return dropDown.value;
+	var email = emailInput.value;
+	var regex = /\S+@\S+\.\S+/;
+	return regex.test(email);
 }
 
 function ajaxRequestGetTax(url)
@@ -67,11 +78,12 @@ function ajaxRequestGetTax(url)
 	{
 		if (httpRequestInstance.readyState == 4 && httpRequestInstance.status == 200) 
 		{
-			var selectedState = getSelectedState();
+			var selectedState = dropDown.value;
 			var jsonTax = JSON.parse(httpRequestInstance.responseText);
 			var tax = jsonTax[selectedState];
-			calculateCost(tax);
-			outputCost();
+			var totalCost = calculateCost(tax);
+			outputCost(totalCost);
+			animation();
 		}
 	};
   
@@ -79,32 +91,19 @@ function ajaxRequestGetTax(url)
 	httpRequestInstance.send();
 }
 
-function checkEmail()
+function calculateCost(tax)
 {
-	var email = emailInput.value;
-	var regex = /\S+@\S+\.\S+/;
-	return regex.test(email);
+	
 }
 
-/*
-function delay(ms) 
+function outputCost()
 {
-   ms += new Date().getTime();
-   while (new Date() < ms){}
+	
 }
 
-function checkNumsEntered()
-{	
-	if(!isNaN(pinoInput.value) && !isNaN(charInput.value) &&
-		!isNaN(sauvInput.value) && !isNaN(riesInput.value))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+function animation()
+{
+	
 }
-*/
 
 window.onload = init;
